@@ -32,5 +32,8 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'oxidized', '~> 0.28'
 
+  # FIXME: Remove comment after a newer version than 0.6.0 is released
+  # spec.add_runtime_dependency 'oxidized-script', '~> 0.7'
+
   spec.add_development_dependency 'rubocop', '~> 1.44'
 end
