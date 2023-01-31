@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+require 'oxidized/cli'
+
+# Override the original behavior
+# See https://github.com/mixigroup/oxidized-mix for details
+require 'oxidized_mix'
+
+def configure_oxidized
+  Oxidized.config.output.default = 'git'
+
+  # This script covers multi-repo actually, but the original oxidized requires config below
+  Oxidized.config.output.git.single_repo = true
+
+  Oxidized.config.output.git.subdir = 'config'
+
+  Oxidized.config.use_syslog = true
+end
+
+begin
+  cli = Oxidized::CLI.new
+
+  Oxidized::Config.load_custom cli.extra_config
+  configure_oxidized
+  Oxidized.setup_logger
+  Oxidized.mgr = Oxidized::Manager.new
+  Oxidized.mgr.load_custom_models
+
+  result = cli.run
+  abort unless result.failed_nodes.empty?
+rescue StandardError => e
+  warn e
+  raise if Oxidized.config.debug
+
+  exit 1
+end

@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require 'oxidized/script/cli'
+
+# Override the original behavior
+# See https://github.com/mixigroup/oxidized-mix for details
+require 'oxidized_mix'
+
+begin
+  cli = Oxidized::Script::CLI.new
+
+  Oxidized::Config.load_custom
+  Oxidized.mgr = Oxidized::Manager.new
+  Oxidized.mgr.load_custom_models
+
+  cli.run
+rescue StandardError => e
+  warn e
+  raise if Oxidized.config.debug
+
+  exit 1
+end
