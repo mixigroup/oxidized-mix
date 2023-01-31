@@ -1,0 +1,17 @@
+Metrics/MethodLength:
+  CountComments: false
+  Max: 20
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Gemspec/RequiredRubyVersion:
+  Enabled: false
+
+Layout/HashAlignment:
+  EnforcedHashRocketStyle:
+    - key
+    - table
+  EnforcedColonStyle:
+    - key
+    - table
