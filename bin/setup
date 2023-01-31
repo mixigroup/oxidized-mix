@@ -6,3 +6,5 @@ set -vx
 bundle install
 
 # Do any other automated setup that you need to do here
+
+pre-commit install --hook-type pre-commit --hook-type commit-msg
