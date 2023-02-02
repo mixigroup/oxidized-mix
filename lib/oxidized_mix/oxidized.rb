@@ -1,0 +1,6 @@
+require_relative 'oxidized/config'
+require_relative 'oxidized/core'
+require_relative 'oxidized/manager'
+require_relative 'oxidized/output/git'
+require_relative 'oxidized/source/csv'
+require_relative 'oxidized/worker'

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'lib/oxidized/mix/version'
+require_relative 'lib/oxidized_mix/version'
 
 Gem::Specification.new do |spec|
   spec.name = 'oxidized-mix'
-  spec.version = Oxidized::Mix::VERSION
+  spec.version = OxidizedMix::VERSION
   spec.authors = ['Shintaro Kojima']
   spec.email = ['goodies@codeout.net']
 
