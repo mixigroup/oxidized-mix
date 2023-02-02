@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "mix/version"
+require_relative 'mix/version'
 
 module Oxidized
   module Mix

@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
-require_relative "lib/oxidized/mix/version"
+require_relative 'lib/oxidized/mix/version'
 
 Gem::Specification.new do |spec|
-  spec.name = "oxidized-mix"
+  spec.name = 'oxidized-mix'
   spec.version = Oxidized::Mix::VERSION
-  spec.authors = ["Shintaro Kojima"]
-  spec.email = ["goodies@codeout.net"]
+  spec.authors = ['Shintaro Kojima']
+  spec.email = ['goodies@codeout.net']
 
-  spec.summary = "Oxidized Mix"
-  spec.description = "Custom Oxidized for MIXI operation which covers both oxidized and oxidized-script"
-  spec.homepage = "https://github.com/mixigroup/oxidized-mix"
-  spec.required_ruby_version = ">= 2.6.0"
+  spec.summary = 'Oxidized Mix'
+  spec.description = 'Custom Oxidized for MIXI operation which covers both oxidized and oxidized-script'
+  spec.homepage = 'https://github.com/mixigroup/oxidized-mix'
+  spec.required_ruby_version = '>= 2.6.0'
 
   # spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
   #
@@ -26,9 +26,9 @@ Gem::Specification.new do |spec|
       (f == __FILE__) || f.match(%r{\A(?:(?:bin|test|spec|features)/|\.(?:git|travis|circleci)|appveyor)})
     end
   end
-  spec.bindir = "exe"
+  spec.bindir = 'exe'
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
+  spec.require_paths = ['lib']
 
-  spec.add_development_dependency "rubocop", "~> 1.44"
+  spec.add_development_dependency 'rubocop', '~> 1.44'
 end
