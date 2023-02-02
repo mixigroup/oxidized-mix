@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/ytti/oxidized-script.git
+  revision: 988cded5d89f52e274afb545bd3e011e19d5d22d
+  specs:
+    oxidized-script (0.6.0)
+      oxidized (~> 0.28)
+      slop (~> 4.6)
+
 PATH
   remote: .
   specs:
@@ -52,6 +60,7 @@ PLATFORMS
 
 DEPENDENCIES
   oxidized-mix!
+  oxidized-script!
   rake (~> 13.0)
   rubocop (~> 1.44)
 
