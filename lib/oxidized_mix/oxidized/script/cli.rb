@@ -6,7 +6,7 @@ module OxidizedMix
     module Script
       # Wrapper of Oxidized::CLI to customize
       class CLI < ::Oxidized::Script::CLI
-        attr_reader :extra_config
+        include Oxidized::CLIUtil
 
         def opts_parse(cmd)
           # parse once to tweak the default parser
@@ -24,35 +24,8 @@ module OxidizedMix
 
         private
 
-        def empty_argv
-          argv = ARGV.dup
-          ARGV.clear
-          result = yield
-
-          ARGV.replace argv
-          result
-        end
-
-        def custom_options(opts)
-          # disable "--daemonize"
-          opts.options.reject! { |o| o.flag == '--daemonize' }
-
-          add_custom_options opts
-          opts
-        end
-
         def add_custom_options(opts)
           opts.array '--repo', 'repository working directory where oxidized works', required: true
-        end
-
-        def pick_extra_config(result)
-          config = ::Asetus::ConfigStruct.new
-
-          config.output.git.user = result[:git_user]
-          config.output.git.email = result[:git_email]
-          config.repos = result[:repo]
-
-          config
         end
 
         def remove_arguments
