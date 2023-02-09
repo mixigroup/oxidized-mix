@@ -8,6 +8,15 @@ module OxidizedMix
   module CreateIgnorable
     def create(opts = {}) end
   end
+
+  # Override the behavior of Asetus
+  # - Load ConfigStruct and override
+  module ConfigLoadable
+    def load_from_config(config)
+      @cfg = merge @cfg, config
+    end
+  end
 end
 
 Asetus.prepend OxidizedMix::CreateIgnorable
+Asetus.include OxidizedMix::ConfigLoadable

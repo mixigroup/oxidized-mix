@@ -18,7 +18,7 @@ def configure_oxidized
 end
 
 begin
-  cli = Oxidized::CLI.new
+  cli = OxidizedMix::Oxidized::CLI.new
 
   Oxidized::Config.load_custom cli.extra_config
   configure_oxidized

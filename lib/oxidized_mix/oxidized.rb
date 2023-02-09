@@ -1,3 +1,4 @@
+require_relative 'oxidized/cli'
 require_relative 'oxidized/config'
 require_relative 'oxidized/core'
 require_relative 'oxidized/manager'

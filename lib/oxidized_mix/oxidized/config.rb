@@ -8,8 +8,8 @@ module OxidizedMix
       # class methods
       module ClassMethods
         # rubocop:disable Metrics/AbcSize
-        def load_custom(cmd_opts = {})
-          load cmd_opts
+        def load_custom(extra_config)
+          ::Oxidized.asetus.load_from_config extra_config
 
           ::Oxidized.config.username    = nil
           ::Oxidized.config.resolve_dns = false
@@ -24,15 +24,11 @@ module OxidizedMix
           ::Oxidized.config.source.csv.map.model  = 1
           ::Oxidized.config.source.csv.map.group  = 2
 
-          # custom config
-          ::Oxidized.config.repos = %w[~/my-repo]
-
           # onyx (model: "mlnxos") is very slow
           ::Oxidized.config.timeout = 30
 
           ::Oxidized.config
         end
-
         # rubocop:enable Metrics/AbcSize
       end
 
