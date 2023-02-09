@@ -15,6 +15,7 @@ def configure_oxidized
   Oxidized.config.output.git.subdir = 'config'
 
   Oxidized.config.use_syslog = true
+  Oxidized.setup_logger
 end
 
 begin
@@ -22,7 +23,6 @@ begin
 
   Oxidized::Config.load_custom cli.extra_config
   configure_oxidized
-  Oxidized.setup_logger
   Oxidized.mgr = Oxidized::Manager.new
   Oxidized.mgr.load_custom_models
 
