@@ -6,17 +6,19 @@ require 'oxidized/script/cli'
 # See https://github.com/mixigroup/oxidized-mix for details
 require 'oxidized_mix'
 
-begin
-  cli = Oxidized::Script::CLI.new
+debug = ARGV.include?('-d') || ARGV.include?('--debug')
 
-  Oxidized::Config.load_custom
+begin
+  cli = OxidizedMix::Oxidized::Script::CLI.new
+
+  Oxidized::Config.load_custom cli.extra_config
   Oxidized.mgr = Oxidized::Manager.new
   Oxidized.mgr.load_custom_models
 
   cli.run
 rescue StandardError => e
   warn e
-  raise if ARGV.include?('-d') || ARGV.include?('--debug')
+  raise if debug
 
   exit 1
 end
