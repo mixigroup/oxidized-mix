@@ -30,7 +30,7 @@ begin
   abort unless result.failed_nodes.empty?
 rescue StandardError => e
   warn e
-  raise if Oxidized.config.debug
+  raise if ARGV.include?('-d') || ARGV.include?('--debug')
 
   exit 1
 end

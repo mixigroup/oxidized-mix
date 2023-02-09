@@ -16,7 +16,7 @@ begin
   cli.run
 rescue StandardError => e
   warn e
-  raise if Oxidized.config.debug
+  raise if ARGV.include?('-d') || ARGV.include?('--debug')
 
   exit 1
 end
