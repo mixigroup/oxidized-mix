@@ -1,32 +1,36 @@
 # Oxidized Mix
 
-This is custom Oxidized for MIXI network operation which covers both [oxidized](https://github.com/ytti/oxidized) and [oxidized-script](https://github.com/ytti/oxidized-script).
+This is custom Oxidized for MIXI network operation which covers both [oxidized](https://github.com/ytti/oxidized)
+and [oxidized-script](https://github.com/ytti/oxidized-script).
 
 
 ## Concept
 
-This gem extends Oxidized to introduce the features below. We should have upstreamed some of them and will do in the future, use this gem until then.
+This gem extends Oxidized to introduce the features below. We should have upstreamed some of them and will do in the
+future, use this gem until then.
 
 
 ## Features
 
-### :cat: Pre-defined oxidized config
+### :zap: Config free
 
-Define minimal configurations within gem to share among the team while the original oxidized assumes a config file `~/.config/oxidized/config`.
+Define minimal configurations within the gem to run without a config file while the original oxidized assumes
+`~/.config/oxidized/config` or something like that.
 
-### :dog: Custom model
+### :zap: Custom model
 
-Include custom models within the gem to share among the team while the original oxidized assumes `~/.config/oxidized/model/` for location.
+Include custom models within the gem to share among the team while the original oxidized assumes
+`~/.config/oxidized/model/` for location.
 
-### :mouse: One-off execution
+### :zap: One-off execution
 
 Introduce a feature to run once while the original oxidized runs as daemon.
 
-### :hamster: Store files in sub-directories
+### :zap: Store files in sub-directories
 
 Store device config files in `[repository root]/[group name]/` while the original oxidized stores in `[repository root]/`.
 
-### :rabbit: Multi-repo support
+### :zap: Multi-repo support
 
 Introduce multi-repo support while the original oxidized assumes single-repo.
 
@@ -35,20 +39,52 @@ Introduce multi-repo support while the original oxidized assumes single-repo.
 
 Install the gem and add to the application's Gemfile by executing:
 
-```
-bundle add oxidized-mix
+```shell
+bundle add oxidized-mix --github mixigroup/oxidized-mix
+bundle add oxidized-script --github ytti/oxidized-script
+
+# or
+
+bundle add oxidized-mix --git https://github.com/mixigroup/oxidized-mix.git
+bundle add oxidized-script --git bundle add oxidized-script --github ytti/oxidized-script
 ```
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
 ```
-gem install oxidized-mix
+gem install specific_install
+gem specific_install https://github.com/mixigroup/oxidized-mix.git
+gem specific_install https://github.com/ytti/oxidized-script.git
+```
+
+:memo: Install [oxidized-script](https://github.com/ytti/oxidized-script) manually until a newer version is released. oxidized-script `0.6.0` doesn't work along with oxidized `0.28`. See [the issue](https://github.com/ytti/oxidized-script/issues/43) for details.
+
+
+## Config
+
+Oxidized Mix requires `router.db` in the repository root, which should be looks like:
+
+```
+device1:junos:Group1
+device2:eos:Group1
 ```
 
 
 ## Usage
 
-TODO: Write usage instructions here
+Run `oxidized` once:
+
+```shell
+oxidized-mix --git-user "Your Name" --git-email your-email@example.com --repo your_repo_path
+```
+
+Run `oxs`:
+
+```shell
+oxs-mix --repo your_repo_path device1 "show version; show chassis hard"
+```
+
+:bulb: Original CLI options of `oxidized` and `oxs` are available.
 
 
 ## Development
@@ -60,7 +96,7 @@ To install this gem onto your local machine, run `bundle exec rake install`.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/oxidized-mix.
+Bug reports and pull requests are welcome on GitHub at https://github.com/mixigroup/oxidized-mix.
 
 
 ## Copyright and License
