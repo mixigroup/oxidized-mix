@@ -1,3 +1,4 @@
+require 'etc'
 require 'oxidized/config'
 
 module OxidizedMix
@@ -11,7 +12,7 @@ module OxidizedMix
         def load_custom(extra_config)
           ::Oxidized.asetus.load_from_config extra_config
 
-          ::Oxidized.config.username    = nil
+          ::Oxidized.config.username    = Etc.getpwuid(Process.uid).name
           ::Oxidized.config.resolve_dns = false
           ::Oxidized.config.rest        = false
           # ::Oxidized.config.debug       = true
