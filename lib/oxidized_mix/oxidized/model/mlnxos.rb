@@ -75,8 +75,8 @@ class MLNXOS < Oxidized::Model
 
   cmd 'enable'
 
-  cmd 'show running-config' do |cfg|
-    cfg
+  cmd 'show running-config expanded' do |cfg|
+    cfg.gsub(/ +\n/, "\n")
   end
 
   cfg :ssh do
