@@ -28,8 +28,9 @@ notices and license terms. Your use of the source code for the these subcomponen
 is subject to the terms and conditions of the following licenses.
 
 For lib/oxidized_mix/oxidized/output/git.rb,
-    lib/oxidized_mix/oxidized/model/eos.rb, and
-    lib/oxidized_mix/oxidized/model/junos.rb:
+    lib/oxidized_mix/oxidized/model/eos.rb
+    lib/oxidized_mix/oxidized/model/junos.rb, and
+    lib/oxidized_mix/oxidized/model/mlnxos.rb:
 
   Copyright
   2013-2015 Saku Ytti <saku@ytti.fi>
