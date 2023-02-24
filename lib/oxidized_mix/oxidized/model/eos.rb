@@ -45,8 +45,9 @@ class EOS < Oxidized::Model
 
   comment '! '
 
-  cmd :all do |cfg| # rubocop:disable Style/SymbolProc
-    cfg.cut_both
+  cmd :all do |cfg|
+    cfg = cfg.cut_both
+    cfg.lines.map(&:rstrip).join("\n")
   end
 
   cmd :secret do |cfg|
