@@ -81,6 +81,7 @@ class MLNXOS < Oxidized::Model
 
   cfg :ssh do
     password(/^Password:\s*/)
+    post_login 'terminal length 999'
     pre_logout "\nexit"
   end
 end
