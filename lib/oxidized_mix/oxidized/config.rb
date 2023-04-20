@@ -28,6 +28,9 @@ module OxidizedMix
           # onyx (model: "mlnxos") is very slow
           ::Oxidized.config.timeout = 30
 
+          # same as Oxidized::Jobs::AVERAGE_DURATION to increase @want of Jobs to node count
+          ::Oxidized.config.interval = 5
+
           ::Oxidized.config
         end
         # rubocop:enable Metrics/AbcSize
