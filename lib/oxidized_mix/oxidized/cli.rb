@@ -33,6 +33,9 @@ module OxidizedMix
         config.output.git.email = result[:git_email]
         config.repos = result[:repo]
 
+        threads = result[:threads].to_i
+        config.threads = threads.positive? ? threads : DEFAULT_THREADS
+
         config
       end
     end
@@ -58,6 +61,7 @@ module OxidizedMix
         opts.string '--git-user', 'git user name to add commits', required: true
         opts.string '--git-email', 'git user email to add commits', required: true
         opts.array '--repo', 'repository working directory where oxidized works', required: true
+        opts.string '--threads', 'max number of threads'
       end
     end
   end
