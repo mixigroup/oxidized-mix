@@ -5,6 +5,8 @@ module OxidizedMix
   module Oxidized
     # Util modules
     module CLIUtil
+      DEFAULT_THREADS = 5
+
       attr_reader :extra_config
 
       private
