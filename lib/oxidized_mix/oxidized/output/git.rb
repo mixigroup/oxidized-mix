@@ -89,4 +89,84 @@ module OxidizedMix
   end
 end
 
+module OxidizedMix
+  module Oxidized
+    module Output
+      # Override the behavior of Oxidized::Git
+      # - Don't run "git commit" per node. Do it per group
+      module PerGroupCommittable
+        # modified copy of https://github.com/ytti/oxidized/blob/0.28.0/lib/oxidized/output/git.rb#L171-L189
+
+        # "repository path" => {
+        #   "group name 1" => [<struct file=..., data=...>, ...],
+        #   "group name 2" => [<struct file=..., data=...>, ...],
+        #   ...
+        # }
+        @@_updated_files = Hash.new { |h1, k1|
+          h1[k1] = Hash.new { |h2, k2| h2[k2] = [] }
+        }
+
+        # write in file system, instead of git object tree
+        def update_repo(repo, file, data)
+          oid_old = repo.blob_at(repo.head.target_id, file) rescue nil
+          return false if oid_old && (oid_old.content.b == data.b)
+
+          obj = Struct.new(:repo, :file, :data, :user, :email)
+          @@_updated_files[repo.path][@opt[:group]] << obj.new(repo, file, data, @user, @email)
+
+          @@_hook_registered ||= register_hook # register once
+          true
+        end
+
+        def self.prepended(base)
+          class << base
+            def commit_per_group
+              @@_updated_files.each do |_, files_per_repo|
+                files_per_repo.each do |group, data|
+                  next if data.empty?
+
+                  # reuse the repo instance and data in the first entry
+                  repo = data[0].repo
+                  repo.config['user.name'] = data[0].user
+                  repo.config['user.email'] = data[0].email
+                  index = repo.index
+
+                  data.each do |d|
+                    oid = repo.write d.data, :blob
+                    index.add path: d.file, oid: oid, mode: 0o100644
+                  end
+
+                  Rugged::Commit.create(repo,
+                                        tree: index.write_tree(repo),
+                                        message: "Update#{group.empty? ? '' : " #{group}"} by oxidized",
+                                        parents: repo.empty? ? [] : [repo.head.target].compact,
+                                        update_ref: 'HEAD')
+                  index.write
+                end
+              end
+            end
+          end
+        end
+
+        private
+
+        # Register an unofficial hook to git commit
+        def register_hook
+          hook = Struct.new(:name, :hook)
+          ::Oxidized.Hooks.registered_hooks[:nodes_done] << hook.new('gitcommit', GitCommit.new)
+
+          true
+        end
+      end
+
+      class GitCommit < ::Oxidized::Hook
+        def run_hook(ctx)
+          ::Oxidized::Git.commit_per_group
+        end
+      end
+    end
+  end
+end
+
 ::Oxidized::Git.prepend OxidizedMix::Oxidized::Output::SubdirStorable
+::Oxidized::Git.prepend OxidizedMix::Oxidized::Output::PerGroupCommittable
