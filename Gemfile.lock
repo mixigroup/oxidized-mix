@@ -9,7 +9,7 @@ GIT
 PATH
   remote: .
   specs:
-    oxidized-mix (0.1.0)
+    oxidized-mix (0.1.1)
       oxidized (~> 0.28)
 
 GEM
