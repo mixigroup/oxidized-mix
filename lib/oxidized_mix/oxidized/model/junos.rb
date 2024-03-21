@@ -39,6 +39,8 @@
 
 # Modified copy of https://github.com/ytti/oxidized/blob/0.28.0/lib/oxidized/model/junos.rb
 class JunOS < Oxidized::Model
+  using Refinements
+
   comment '# '
 
   def telnet

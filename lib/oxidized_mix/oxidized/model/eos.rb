@@ -39,6 +39,8 @@
 
 # Modified copy of https://github.com/ytti/oxidized/blob/0.28.0/lib/oxidized/model/eos.rb
 class EOS < Oxidized::Model
+  using Refinements
+
   # Arista EOS model #
 
   prompt(/^.+[#>]\s?$/)
