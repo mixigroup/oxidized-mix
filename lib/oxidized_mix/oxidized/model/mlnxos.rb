@@ -39,6 +39,8 @@
 
 # Modified copy of https://github.com/ytti/oxidized/blob/0.28.0/lib/oxidized/model/mlnxos.rb
 class MLNXOS < Oxidized::Model
+  using Refinements
+
   prompt(/([\w.@()-\[:\s\]]+[#>]\s)$/)
   comment '## '
 
