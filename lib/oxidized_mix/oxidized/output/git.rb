@@ -153,7 +153,7 @@ module OxidizedMix
         # Register an unofficial hook to git commit
         def register_hook
           hook = Struct.new(:name, :hook)
-          ::Oxidized.Hooks.registered_hooks[:nodes_done] << hook.new('gitcommit', GitCommit.new)
+          ::Oxidized.hooks.registered_hooks[:nodes_done] << hook.new('gitcommit', GitCommit.new)
 
           true
         end
