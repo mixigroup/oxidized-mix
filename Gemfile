@@ -6,6 +6,3 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'rake', '~> 13.0'
-
-# FIXME: Remove after a newer version than 0.6.0 is released
-gem 'oxidized-script', github: 'ytti/oxidized-script'
